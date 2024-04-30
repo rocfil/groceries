@@ -28,10 +28,11 @@ body {
 }
 
 h1 {
+  font-style: italic;
   text-align: center;
   background-color: #76acc7;
   font-family: "Trirong", serif;
-  font-size: 8rem;
+  font-size: 6.5rem;
   text-transform: capitalize;
   font-weight: 400;
   word-spacing: 30px;

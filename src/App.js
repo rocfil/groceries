@@ -93,10 +93,26 @@ function Form({ onAddItems }) {
 }
 
 function List({ items, onDeleteItem, onToggleItem }) {
+  // implementando recurso de ordenar os itens na lista:
+  const [sortBy, setSortBy] = useState("input");
+
+  let sortedItems;
+
+  if (sortBy === "input") sortedItems = items;
+
+  if (sortBy === "description")
+    sortedItems = items
+      .slice()
+      .sort((a, b) => a.description.localeCompare(b.description));
+
+  if (sortBy === "incart")
+    sortedItems = items
+      .slice()
+      .sort((a, b) => Number(a.inCart) - Number(b.inCart));
   return (
     <div className="list">
       <ul>
-        {items.map((item) => (
+        {sortedItems.map((item) => (
           <Item
             item={item}
             onDeleteItem={onDeleteItem}
@@ -105,6 +121,14 @@ function List({ items, onDeleteItem, onToggleItem }) {
           />
         ))}
       </ul>
+
+      <div className="actions">
+        <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+          <option value="input">Ordenar: Ordem de inclusão</option>
+          <option value="description">Ordenar: Descrição</option>
+          <option value="incart">Ordenar: No carrinho</option>
+        </select>
+      </div>
     </div>
   );
 }
