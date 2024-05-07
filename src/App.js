@@ -26,12 +26,17 @@ export default function App() {
     );
   }
 
+  function handleClearList() {
+    setItems([]);
+  }
+
   return (
     <div className="app">
       <Logo />
       <Form onAddItems={handleAddItems} />
       <List
         items={items}
+        onClearList={handleClearList}
         onDeleteItem={handleDeleteItems}
         onToggleItem={handleToggleItem}
       />
@@ -92,7 +97,7 @@ function Form({ onAddItems }) {
   );
 }
 
-function List({ items, onDeleteItem, onToggleItem }) {
+function List({ items, onDeleteItem, onToggleItem, onClearList }) {
   // implementando recurso de ordenar os itens na lista:
   const [sortBy, setSortBy] = useState("input");
 
@@ -128,6 +133,7 @@ function List({ items, onDeleteItem, onToggleItem }) {
           <option value="description">Ordenar: Descrição</option>
           <option value="incart">Ordenar: No carrinho</option>
         </select>
+        <button onClick={onClearList}>Limpar lista</button>
       </div>
     </div>
   );
